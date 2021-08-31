@@ -1,9 +1,9 @@
-const ADD_ = '';
+const ADD_ = 'add';
 
 // reducer
 export function counter (state=0, action) {
     switch(action.type) {
-        case ADD_:
+        case 'add':
             return state + 1;
         default:
             return 10
