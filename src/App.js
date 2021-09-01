@@ -14,13 +14,14 @@ function App(props) {
     </div>
   );
 }
-
+// state属性值
 const mapStatetoProps = (state) => {
+  const { testReducer } = state;
   return {
-    num: state
+    num: testReducer.counter
   }
 }
-
+// 方法
 const actionCreators = {
   add, addThunk
 }
