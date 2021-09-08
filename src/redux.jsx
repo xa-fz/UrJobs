@@ -11,10 +11,6 @@ function counter (state=0, action) {
     }
 }
 
-const testReducer = combineReducers({
-    counter
-})
-
 //actions creator
 export function add() {
     return { type: ADD_ }
@@ -27,5 +23,9 @@ export function addThunk() {
         }, 300)
     }
 }
+
+const testReducer = combineReducers({
+    counter
+})
 
 export default testReducer;

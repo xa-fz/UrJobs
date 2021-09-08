@@ -7,6 +7,9 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import allReducers from './reducers';
 import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Auth from './Auth/auth';
+import Dashboard from './Dashboard/dashboard';
 
 const store = createStore(allReducers, applyMiddleware(thunk));
 
@@ -24,7 +27,13 @@ const store = createStore(allReducers, applyMiddleware(thunk));
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+      <Switch>
+          {/*渲染第一个匹配到的路由*/}
+          <Route path="/login" component={Auth} />
+          <Route path="/dashboard" component={Dashboard} />
+        </Switch>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
