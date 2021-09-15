@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Auth from './Auth/auth';
 import Dashboard from './Dashboard/dashboard';
+import './config';
 
 const store = createStore(allReducers, applyMiddleware(thunk));
 
