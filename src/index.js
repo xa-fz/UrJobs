@@ -6,33 +6,21 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import allReducers from './reducers';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Auth from './Auth/auth';
-import Dashboard from './Dashboard/dashboard';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Login from './container/login/login';
+import Register from './container/register/register';
+import AuthRoute from './components/authroute/authRoute';
 import './config';
 
 const store = createStore(allReducers, applyMiddleware(thunk));
-
-// function render () {
-//   ReactDOM.render(
-//     <React.StrictMode>
-//       <App store={store} />
-//     </React.StrictMode>,
-//     document.getElementById('root')
-//   );
-// }
-// render()
-// store.subscribe(render)
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-      <Switch>
-          {/*渲染第一个匹配到的路由*/}
-          <Route path="/login" component={Auth} />
-          <Route path="/dashboard" component={Dashboard} />
-        </Switch>
+        <AuthRoute />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
