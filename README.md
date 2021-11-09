@@ -1,6 +1,11 @@
 # UrJobs
 An app to get a job
 
+## 启动
+1. 前端(reactjs)：npm start or yarn start
+2. 后端(nodejs)：cd server
+   node server.js
+
 ## redux管理数据
 1. reudux中引入createStore();
 2. 创建action、reducer声明和处理数据；

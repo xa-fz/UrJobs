@@ -12,13 +12,23 @@ const Register = () => {
             key: 'Hunter', name: '求职者'
         }], [])
     const [human_type, set_human_type] = useState('Hunter');
+    const [user, set_user] = useState('');
+    const [pwd, set_pwd] = useState('');
+    const [repeat, set_repeat] = useState('');
+
     return (
         <>
             <h2>注册页</h2>
             <List>
-                <InputItem>用户：</InputItem>
-                <InputItem>密码：</InputItem>
-                <InputItem>确认密码：</InputItem>
+                <InputItem onChange={v => {
+                    set_user(v)
+                }}>用户：</InputItem>
+                <InputItem type="password" onChange={v => {
+                    set_pwd(v)
+                }}>密码：</InputItem>
+                <InputItem type="password" onChange={v => {
+                    set_repeat(v)
+                }}>确认密码：</InputItem>
                 <WhiteSpace />
                 {
                     types.map(t => 
@@ -27,7 +37,9 @@ const Register = () => {
                         </RadioItem>
                     )
                 }
-                <Button type="primary">确认</Button>
+                <Button type="primary" onClick={() => {
+                    console.log(user, pwd, repeat, human_type)
+                }}>注册</Button>
             </List>
         </>
     )
