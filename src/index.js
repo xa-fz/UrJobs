@@ -15,15 +15,13 @@ import './config';
 const store = createStore(allReducers, applyMiddleware(thunk));
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <AuthRoute />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <AuthRoute />
+      <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 );
 
