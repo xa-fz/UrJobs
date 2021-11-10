@@ -35,7 +35,6 @@ export function registerSuccess (data) {
 }
 
 export function register({user, pwd, repeatPwd, type}) {
-    console.log(user, pwd, repeatPwd, type)
     if (!user || !pwd) {
         return errorMsg('请输入用户名和密码!')
     }

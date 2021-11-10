@@ -26,7 +26,7 @@ const AuthRoute = (props) => {
     }, [pathname, props.history])
 
     return (
-        <div>用来判断路由跳转</div>
+        <div></div>
     )
 }
 
