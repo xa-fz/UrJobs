@@ -18,8 +18,7 @@ const AuthRoute = (props) => {
                     if (res.data.code === 0) {
 
                     } else {
-                        console.log(props.history);
-                        props.history.push('/login')
+                        // props.history.push('/login')
                     }
                 }
         })

@@ -2,6 +2,7 @@ import React, { useMemo, useState, useCallback } from 'react';
 import { List, InputItem, Radio, WhiteSpace, Button } from 'antd-mobile';
 import { register } from '../../redux/user.redux';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const RadioItem = Radio.RadioItem;
 
@@ -23,14 +24,12 @@ const Register = (props) => {
     } = props;
 
     const handleRegister = useCallback(() => {
-        console.log();
         register({user: username, pwd, repeatPwd, type: human_type})
     }, [username, pwd, repeatPwd, human_type, register])
 
-    console.log();
-
     return (
         <>
+            { user.redirectTo ? <Redirect to={user.redirectTo} /> : null }
             <h2>注册页</h2>
             <List>
                 {
@@ -60,7 +59,6 @@ const Register = (props) => {
 }
 
 function mapStateToProps (state) {
-    console.log(state);
     return {
         user: state.user
     }
