@@ -3,6 +3,7 @@ import { getRedirectPath } from './utils'
 
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 const ERROR_MSG = 'ERROR_MSG'
+const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 
 const initState = {
     isAuth: '',
@@ -23,6 +24,8 @@ export function user (state = initState, action) {
                 redirectTo: getRedirectPath(action.payload),
                 ...action.payload
             }
+        case LOGIN_SUCCESS:
+            return {...state, msg: '', redirectTo: getRedirectPath(action.payload), ...action.payload}
         case ERROR_MSG:
             return {...state, isAuth: false, msg: action.payload}
          default:
@@ -30,8 +33,8 @@ export function user (state = initState, action) {
     }
 }
 
+// actions
 export function errorMsg (msg) {
-    console.log(msg);
     return { payload: msg, type: ERROR_MSG }
 }
 
@@ -39,6 +42,30 @@ export function registerSuccess (data) {
     return { 
         payload: data, 
         type: REGISTER_SUCCESS
+    }
+}
+
+export function loginSuccess (data) {
+    return {
+        payload: data,
+        type: LOGIN_SUCCESS
+    }
+}
+
+// 定义的接口方法
+export function login ({user, pwd}) {
+    if (!user || !pwd) {
+        return errorMsg('请输入用户名和密码!')
+    }
+    return dispatch => {
+        axios.post('/user/login', {user, pwd})
+            .then(res => {
+                if (res.status === 200 && res.data.code === 0) {
+                    dispatch(loginSuccess(res.data.data))
+                } else {
+                    dispatch(errorMsg(res.data.msg))
+                }
+            })
     }
 }
 
@@ -59,5 +86,4 @@ export function register({user, pwd, repeatPwd, type}) {
                 }
             })
     }
-    
 }

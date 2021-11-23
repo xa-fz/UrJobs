@@ -7,8 +7,19 @@ const User = model.getModel('user');
 const utils = require('utility');
 
 Router.get('/list', (_req, res) => {
+    // User.remove({}, () => {}); // 删掉数据库中的所有账户密码信息
     User.find({}, (_err, doc) => {
         return res.json(doc)
+    })
+})
+
+Router.post('/login', (req, res) => {
+    const { user, pwd } = req.body;
+    User.findOne({user, pwd: utils.md5(pwd)}, {pwd: 0, __v: 0, _id: 0}, (_err, doc) => {
+        if(!doc) {
+            return res.json({code: 1, msg: '用户名或密码错误'})
+        }
+        return res.json({ code: 0, data: doc})
     })
 })
 
