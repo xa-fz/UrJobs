@@ -4,12 +4,12 @@ import { getRedirectPath } from './utils'
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 const ERROR_MSG = 'ERROR_MSG'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+const LOGIN_DATA = 'LOGIN_DATA'
 
 const initState = {
     isAuth: '',
     msg: '',
     user: '',
-    pwd: '',
     type: '',
     redirectTo:''
 }
@@ -26,6 +26,8 @@ export function user (state = initState, action) {
             }
         case LOGIN_SUCCESS:
             return {...state, msg: '', redirectTo: getRedirectPath(action.payload), ...action.payload}
+        case LOGIN_DATA:
+            return {...state, ...action.payload}
         case ERROR_MSG:
             return {...state, isAuth: false, msg: action.payload}
          default:
@@ -49,6 +51,13 @@ export function loginSuccess (data) {
     return {
         payload: data,
         type: LOGIN_SUCCESS
+    }
+}
+
+export function loadData (data) {
+    return {
+        payload: data,
+        type: LOGIN_DATA
     }
 }
 

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import { loadData } from '../../redux/user.redux';
+import { connect } from 'react-redux';
 
 const AuthRoute = (props) => {
     const pathname = props.location.pathname;
@@ -11,17 +13,17 @@ const AuthRoute = (props) => {
         if (pluliceList.includes(pathname)) {
             return
         }
+        // 获取用户信息
         axios.get('/user/info')
-            .then(res => {
-                if (res.status === 200) {
-                    console.log(res.data);
-                    if (res.data.code === 0) {
-
-                    } else {
-                        // props.history.push('/login')
-                    }
+        .then(res => {
+            if (res.status === 200) {
+                if (res.data.code === 0) {
+                    loadData(res.data.data);
+                } else {
+                    props.history.push('/login')
                 }
-        })
+            }
+    })
     }, [pathname, props.history])
 
     return (
@@ -29,4 +31,9 @@ const AuthRoute = (props) => {
     )
 }
 
-export default withRouter(AuthRoute)
+const mapDispatchToProps = {
+    loadData
+}
+
+
+export default connect(null, mapDispatchToProps)(withRouter(AuthRoute))
